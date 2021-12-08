@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./conduit
+    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    volumes:
+      - ./conduit:/usr/src/app
+    ports:
+      - 5000:8000
+    environment:
+      - ENVIRONMENT=prod
+      - TESTING=0
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    ports:
+      - '${DB_PORT}:5432'
+    environment:
+      POSTGRES_PASSWORD: '${DB_PASSWORD}'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+
+volumes:
+  db-data:
+  conduit:
+
