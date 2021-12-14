@@ -3,3 +3,4 @@ app.egg-info
 venv
 htmlcov
 .coverage
+Session.vim
