@@ -5,7 +5,7 @@ import jwt
 from pydantic import ValidationError
 
 from app.models.domain.users import User
-from app.models.schama.jwt import JWTMeta, JWTUser
+from app.models.schemas.jwt import JWTMeta, JWTUser
 
 JWT_SUBJECT = "access"
 ALGORITHM = "HS256"

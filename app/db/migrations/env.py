@@ -14,7 +14,7 @@ DATABASE_URL = SETTINGS.database_url
 
 config = context.config
 
-fileConfig(config.config_file_name)  # tyoe: ignore
+fileConfig(config.config_file_name)  # type: ignore
 
 target_metadata = None
 

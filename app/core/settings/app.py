@@ -12,19 +12,21 @@ from app.core.settings.base import BaseAppSettings
 class AppSettings(BaseAppSettings):
     debug: bool = False
     docs_url: str = "/docs"
-    openapi_prefix: str = ".env"
+    openapi_prefix: str = ""
     openapi_url: str = "/openapi.json"
     redoc_url: str = "/redoc"
-    title: str = "Conduit FastAPI"
-    version: str = "0.0.1"
+    title: str = "FastAPI example application"
+    version: str = "0.0.0"
 
-    database_url = PostgresDsn
+    database_url: PostgresDsn
     max_connection_count: int = 10
     min_connection_count: int = 10
 
     secret_key: SecretStr
 
-    api_prefix: str = "Token"
+    api_prefix: str = "/api"
+
+    jwt_token_prefix: str = "Token"
 
     allowed_hosts: List[str] = ["*"]
 
@@ -47,8 +49,7 @@ class AppSettings(BaseAppSettings):
         }
 
     def configure_logging(self) -> None:
-        logging.getLogger().handler = [InterceptHandler()]
-
+        logging.getLogger().handlers = [InterceptHandler()]
         for logger_name in self.loggers:
             logging_logger = logging.getLogger(logger_name)
             logging_logger.handlers = [InterceptHandler(level=self.logging_level)]
